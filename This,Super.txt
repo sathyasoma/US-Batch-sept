@@ -1,0 +1,384 @@
+
+
+================================This Keyword===============================
+
+this keyword. In Java, this is a reference variable that refers to the current 
+object.
+
+
+1. this keyword can be used to refer to a current class instance variable
+--------------------------------------------------------------------
+The this keyword can be used to refer current class instance variable. 
+
+If there is ambiguity between the instance variables and parameters, 
+this keyword resolves the problem of ambiguity. 
+
+Understanding the problem without this keyword:
+----------------------------------------------
+Let's understand the problem if we don't use this keyword by the example given below:
+public class User {
+    private int id;
+    private String firstName;
+    private String lastName;
+    private int age;
+
+    public User(int id, String firstName, String lastName, int age) {
+        id = id;
+        firstName = firstName;
+        lastName = lastName;
+        age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+    }
+
+    public static void main(String[] args) {
+        User user = new User(1, "Ramesh", "Fadatare", 28);
+        System.out.println(user.toString());
+    }
+}
+----->>>>>
+public class UserWithThisKeyword {
+    private int id;
+    private String firstName;
+    private String lastName;
+    private int age;
+
+    public UserWithThisKeyword(int id, String firstName, String lastName, int age) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + "]";
+    }
+
+    public static void main(String[] args) {
+        UserWithThisKeyword user = new UserWithThisKeyword(1, "Ramesh", "Fadatare", 28);
+        System.out.println(user.toString());
+    }
+}
+
+
+2. this keyword can be used to invoke current class method (implicitly):
+---------------------------------------------------------------------
+The below example demonstrates how to invoke the method of the current class by using this keyword.
+public class ThisKeywordWithMethod {
+    public static void main(String[] args) {
+        A a = new A();
+        a.print();
+    }
+}
+
+class A {
+    public void display() {
+        System.out.println("Inside display method");
+    }
+
+    public void print() {
+        this.display();
+        System.out.println("Inside print method");
+    }
+}
+
+
+3. this() can be used to invoke the current class constructor:
+---------------------------------------------------------
+The this() constructor call can be used to invoke the current class constructor. It is used to reuse the constructor. In other words, it is used for constructor chaining.
+To understand how this() can be used, let’s work through a short example. 
+First, consider the following class that does not use this( ):
+class MyClass {
+    int a;
+    int b;
+    // initialize a and b individually
+    MyClass(int i, int j) {
+        a = i;
+        b = j;
+    }
+    // initialize a and b to the same value
+    MyClass(int i) {
+        a = i;
+        b = i;
+    }
+    // give a and b default values of 0
+    MyClass() {
+        a = 0;
+        b = 0;
+    }
+}
+This class contains three constructors, each of which initializes the values of a and b. 
+The first is passed individual values for a and b. 
+The second is passed just one value, which is assigned to both a and b. 
+The third gives a and b default values of zero. 
+By using this( ), it is possible to rewrite MyClass as shown here:
+
+
+public class ThisKeywordWithConstructor {
+    public static void main(String[] args) {
+        MyClass myClass = new MyClass();
+        MyClass myClass1 = new MyClass(10);
+        MyClass myClass2 = new MyClass(10, 20);
+
+    }
+}
+
+class MyClass {
+    int a;
+    int b;
+
+    // initialize a and b individually
+    MyClass(int i, int j) {
+        a = i;
+        b = j;
+    }
+
+    // initialize a and b to the same value
+    MyClass(int i) {
+        this(i, i); // invokes MyClass(i, i)
+    }
+
+    // give a and b default values of 0
+    MyClass() {
+        this(0); // invokes MyClass(0)
+    }
+}
+Note that the call to this() must be the first statement in the constructor.
+
+4. this keyword can be passed as an argument in the method call:
+----------------------------------------------------------------
+The this keyword can also be passed as an argument in the method. It is mainly used in the event handling. 
+In the below example, we are passing this keyword to printStudent(this) method:
+public void print() {
+    printStudent(this);
+}
+Here is a complete program to demonstrate how to use this keyword to pass as an argument in the method call:
+
+public class ArgumentInMethodThis {
+    public static void main(String[] args) {
+        Student student = new Student("Ramesh", "STU100", "Physics");
+        student.print();
+    }
+}
+
+class Student {
+    private String name;
+    private String rollNo;
+    private String course;
+
+
+    public Student(String name, String rollNo, String course) {
+        super();
+        this.name = name;
+        this.rollNo = rollNo;
+        this.course = course;
+    }
+
+    public void print() {
+        printStudent(this);
+    }
+
+    private void printStudent(Student student) {
+        System.out.println(student.name);
+        System.out.println(student.course);
+        System.out.println(student.rollNo);
+    }
+}
+
+5. this keyword can be passed as an argument in the constructor call:
+-----------------------------------------------------------------------
+We can pass this keyword in the constructor also. 
+It is useful if we have to use one object in multiple classes. 
+
+public class ArgumentInConstructorThis {
+    public static void main(String[] args) {
+        ClassB classB = new ClassB(10, "Demo");
+    }
+}
+
+class ClassA {
+
+    ClassB classB;
+    public ClassA(ClassB classB) {
+        this.classB = classB;
+        printClassB();
+    }
+    public void printClassB() {
+        System.out.println(this.classB.getId());
+        System.out.println(this.classB.getName());
+    }
+}
+
+class ClassB {
+    private int id;
+    private String name;
+
+    public ClassB(int id, String name) {
+        this.id = id;
+        this.name = name;
+
+        new ClassA(this);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+6. this keyword can be used to return the current class instance from the method:
+=============================================================================
+We can return this keyword as a statement from the method. 
+In such a case, the return type of the method must be the class type (non-primitive). 
+
+public class ThisReturnExample {
+    public static void main(String[] args) {
+        DemoClass demoClass = new DemoClass();
+        demoClass.test().print();
+    }
+}
+
+class DemoClass {
+    public DemoClass test() {
+        return this;
+    }
+
+    public void print() {
+        System.out.println("Inside Demo Class");
+    }
+}
+
+
+
+===========================Super Keyword===============================
+
+super keyword and it's usage with lots of examples.
+
+The super keyword in Java is a reference variable that is used to 
+refer parent class object.
+The super has two general forms:
+------------------------------------
+The first calls the superclass constructor.
+The second is used to access methods or instance variables of the superclass 
+that has been hidden by a member of a subclass.
+
+===========================Examples==============================
+
+Step 1: Create a Box class with different versions of a constructor.
+//A complete implementation of BoxWeight.
+class Box {
+    private double width;
+    private double height;
+    private double depth;
+
+    //construct clone of an object
+    Box(Box ob) { // pass object to constructor
+        width = ob.width;
+        height = ob.height;
+        depth = ob.depth;
+    }
+
+    //constructor used when all dimensions specified
+    Box(double w, double h, double d) {
+        width = w;
+        height = h;
+        depth = d;
+    }
+
+    //constructor used when no dimensions specified
+    Box() {
+        width = -1; // use -1 to indicate
+        height = -1; // an uninitialized
+        depth = -1; // box
+    }
+
+    //constructor used when cube is created
+    Box(double len) {
+        width = height = depth = len;
+    }
+
+    //compute and return volume
+    double volume() {
+        return width * height * depth;
+    }
+}
+Step 2: Create BoxWeight class that provides constructors for the various ways that a box can be constructed. In each case, super( ) is called using the appropriate arguments.
+//BoxWeight now fully implements all constructors.
+class BoxWeight extends Box {
+    double weight; // weight of box
+    //construct clone of an object
+
+    BoxWeight(BoxWeight ob) { // pass object to constructor
+        super(ob);
+        weight = ob.weight;
+    }
+
+    //constructor when all parameters are specified
+    BoxWeight(double w, double h, double d, double m) {
+        super(w, h, d); // call superclass constructor
+        weight = m;
+    }
+
+    //default constructor
+    BoxWeight() {
+        super();
+        weight = -1;
+    }
+
+    //constructor used when cube is created
+    BoxWeight(double len, double m) {
+        super(len);
+        weight = m;
+    }
+}
+Here, BoxWeight( ) calls super( ) with the arguments w, h, and d. This causes the Box constructor to be called, which initializes width, height, and depth using these values.
+BoxWeight no longer initializes these values itself. It only needs to initialize the value unique to it: weight. This leaves Box free to make these values private if desired.
+Step 3: Let's create SuperKeyword class to test above use-cases:
+
+
+public class SuperKeyword {
+    public static void main(String args[]) {
+        BoxWeight mybox1 = new BoxWeight(10, 20, 15, 34.3);
+        BoxWeight mybox2 = new BoxWeight(2, 3, 4, 0.076);
+        BoxWeight mybox3 = new BoxWeight(); // default
+        BoxWeight mycube = new BoxWeight(3, 2);
+        BoxWeight myclone = new BoxWeight(mybox1);
+        double vol;
+        vol = mybox1.volume();
+        System.out.println("Volume of mybox1 is " + vol);
+        System.out.println("Weight of mybox1 is " + mybox1.weight);
+        System.out.println();
+        vol = mybox2.volume();
+        System.out.println("Volume of mybox2 is " + vol);
+        System.out.println("Weight of mybox2 is " + mybox2.weight);
+        System.out.println();
+        vol = mybox3.volume();
+        System.out.println("Volume of mybox3 is " + vol);
+        System.out.println("Weight of mybox3 is " + mybox3.weight);
+        System.out.println();
+        vol = myclone.volume();
+        System.out.println("Volume of myclone is " + vol);
+        System.out.println("Weight of myclone is " + myclone.weight);
+        System.out.println();
+        vol = mycube.volume();
+        System.out.println("Volume of mycube is " + vol);
+        System.out.println("Weight of mycube is " + mycube.weight);
+        System.out.println();
+    }
+}
+
+
+
+note:
+-------
+
+super can be used to refer to immediate parent class instance variable.
+super can be used to invoke immediate parent class method.
+super() can be used to invoke immediate parent class constructor.
