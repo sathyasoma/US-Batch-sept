@@ -1,0 +1,216 @@
+It is the concept of hiding the complex implementation details and showing only the essential features of the object.
+
+1. What is Abstraction?
+Abstraction is the process of hiding the implementation details and showing only 
+the functionality to the user. It focuses on what the object does instead of how 
+it does it. Abstraction allows you to manage complexity by breaking down complex 
+systems into simpler components.
+
+In Java, abstraction is achieved using abstract classes and interfaces.
+
+2. Benefits of Abstraction
+Reduces complexity: By hiding unnecessary details, abstraction makes the system easier to understand and use.
+Improves code readability: Abstraction allows you to focus on an object's high-level behavior without getting bogged down by implementation details.
+Enhances maintainability: Abstraction helps to encapsulate changes, so modifications in the implementation do not affect other parts of the system.
+Facilitates code reuse: Abstract components can be reused across different parts of the application or even in different applications.
+
+3. Real-World Examples of Abstraction
+Example: Man Driving a Car
+Consider a man driving a car. 
+The man knows what each pedal and steering wheel does, but he doesn't know how the 
+car does these things internally. He doesn't know about the inner mechanisms that 
+empower these things. This is an example of abstraction.
+
+Example: ATM Machine
+Another real-world example is an ATM Machine. 
+All users perform operations on the ATM machine like cash withdrawal,
+money transfer, retrieving mini-statements, etc., but they do not know the 
+internal details about the ATM. This is another example of abstraction.
+
+===============================syntax===================================
+
+4. Abstract Class
+An abstract class in Java is a class that cannot be instantiated and may contain abstract methods, which are methods without a body. Subclasses of the abstract class are responsible for providing implementations for these abstract methods.
+
+Syntax:
+abstract class AbstractClassName {
+    // Abstract method (no body)
+    abstract void abstractMethod();
+
+    // Regular method
+    void regularMethod() {
+        // Method body
+    }
+}
+5. Interface
+An interface in Java is a reference type, similar to a class, that can contain only constants, method signatures, default methods, static methods, and nested types. Interfaces cannot contain instance fields or constructors.
+
+Syntax:
+interface InterfaceName {
+    // Abstract method (implicitly public and abstract)
+    void abstractMethod();
+
+    // Default method
+    default void defaultMethod() {
+        // Method body
+    }
+
+    // Static method
+    static void staticMethod() {
+        // Method body
+    }
+}
+
+=============================Differences=================================
+Feature	            Abstract Class	                     Interface
+Methods:	 ->Can have both abstract and concrete methods	->Only abstract methods (until Java 8)
+Fields:	 ->Can have instance variables	                    ->Can only have static and final variables
+Multiple Inheritance:->Does not support multiple inheritance	->Supports multiple inheritance
+Access Modifiers:	->Can have any access modifier	            ->Methods are implicitly public
+Constructor:	->Can have constructors	                        ->Cannot have constructors
+
+
+=========================Examples=============================================
+
+
+7. Example: Abstraction with Abstract Class
+
+
+// Abstract class
+abstract class Animal {
+    // Abstract method
+    abstract void makeSound();
+
+    // Regular method
+    void eat() {
+        System.out.println("This animal is eating.");
+    }
+}
+
+// Subclass
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Bark");
+    }
+}
+
+// Usage
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.makeSound(); // Output: Bark
+        dog.eat(); // Output: This animal is eating.
+    }
+}
+
+
+Example: Abstraction with Interface
+
+
+// Interface
+interface Animal {
+    void makeSound();
+    void eat();
+}
+
+// Class implementing the interface
+class Dog implements Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Bark");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("This animal is eating.");
+    }
+}
+
+// Usage
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.makeSound(); // Output: Bark
+        dog.eat(); // Output: This animal is eating.
+    }
+}
+
+Example : Employee, Contractor, and FullTimeEmployee Example
+
+
+// Abstract class
+abstract class Employee {
+    private String name;
+    private int employeeId;
+
+    public Employee(String name, int employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    // Abstract method
+    abstract void calculatePay();
+}
+
+// FullTimeEmployee class
+class FullTimeEmployee extends Employee {
+    private double salary;
+
+    public FullTimeEmployee(String name, int employeeId, double salary) {
+        super(name, employeeId);
+        this.salary = salary;
+    }
+
+    @Override
+    void calculatePay() {
+        System.out.println("FullTimeEmployee Pay: " + salary);
+    }
+}
+
+// Contractor class
+class Contractor extends Employee {
+    private double hourlyRate;
+    private int hoursWorked;
+
+    public Contractor(String name, int employeeId, double hourlyRate, int hoursWorked) {
+        super(name, employeeId);
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    void calculatePay() {
+        System.out.println("Contractor Pay: " + (hourlyRate * hoursWorked));
+    }
+}
+
+// Usage
+public class Main {
+    public static void main(String[] args) {
+        Employee fullTimeEmployee = new FullTimeEmployee("Alice", 101, 60000);
+        fullTimeEmployee.calculatePay(); // Output: FullTimeEmployee Pay: 60000.0
+
+        Employee contractor = new Contractor("Bob", 102, 50, 160);
+        contractor.calculatePay(); // Output: Contractor Pay: 8000.0
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
