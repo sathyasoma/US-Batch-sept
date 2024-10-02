@@ -1,0 +1,61 @@
+
+===========================Final-------------------------
+
+
+The final keyword may be applied to a variable, indicating the value
+of the final variable can not be changed (It will be constant).
+
+The final keyword may be applied to a class, indicating the class 
+may not be extended (subclassed).
+The final keyword may be applied to a method, indicating the method 
+may not be overridden in any subclass
+A final variable that has no value it is called blank final 
+variable or uninitialized final variable. 
+It can be initialized in the constructor only. 
+The blank final variable can be static also which will be 
+initialized in the static block only.
+Let's discuss usage of a final keyword with respect to variable, 
+method, and class.
+
+
+Java final variable:
+----------------------
+If you make any variable as final, you cannot change the value of a final variable(It will be constant).
+
+Java final method:
+The final keyword may be applied to a method, indicating the method 
+may not be overridden in any subclass.
+
+When we design a class and feel that a method shouldn’t be overridden, we can make this method final. We can also find many final methods in Java core libraries.
+
+Sometimes we don’t need to prohibit a class extension entirely, 
+but only prevent overriding of some methods. 
+A good example of this is the Thread class. 
+It’s legal to extend it and thus create a custom thread class. 
+But its isAlive() methods is final.
+
+Java final class:
+---------------
+The final keyword may be applied to a class, indicating the class may not be extended (subclassed).
+If we look at the code of Java core libraries, we’ll find many final classes there. For example String, Wrapper classes and BigDecimal, BigInteger etc.
+
+What is blank or uninitialized final variable:
+----------------------------------------------
+A final variable that is not initialized at the time of declaration 
+is known an as a blank final variable.
+If you want to create a variable that is initialized at the time of 
+creating an object and once initialized may not be changed, it is 
+useful. 
+
+For example PAN CARD number of an employee.
+
+It can be initialized only in the constructor.
+Example of blank final variable
+class Student{  
+    int id;  
+    String name;  
+    final String PAN_CARD_NUMBER;  
+...  
+}  
+Note that the final PAN_CARD_NUMBER variable not initialized. 
+We can initialize a blank final variable only in a constructor.
