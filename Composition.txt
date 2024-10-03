@@ -1,0 +1,129 @@
+ allows a class to contain objects of other classes to achieve code reuse and establish a has-a relationship. 
+ Unlike inheritance, which represents an is-a relationship, composition models a relationship where one object is made up of one or more objects.
+ 
+What is Composition:
+---------------------
+Composition is a design principle where a class contains references to one or more 
+objects of other classes. This allows the class to use the functionality of the 
+composed objects and delegate tasks to them. 
+Composition is often preferred over inheritance because it promotes greater 
+flexibility and modularity in the design.
+
+Example: A university consists of several departments. 
+Whenever a university object is destroyed automatically, 
+all the department objects will be destroyed. 
+Without an existing university object, there is no chance of an existing 
+dependent object; hence, these are strongly associated, and this relationship 
+is called composition.
+
+Benefits of Composition:
+------------------------
+Reusability: Composition allows for code reuse by including instances of other classes.
+Flexibility: Changes to composed objects can be made independently of the class that uses them.
+Encapsulation: Composition encapsulates the functionality of composed objects, reducing dependencies.
+Better Modeling: Composition better represents real-world relationships where objects are made up of other objects.
+
+Composition vs Inheritance:
+-------------------------------
+Feature	                   Composition	                          Inheritance
+
+Relationship:	*Has-a (one object contains another object)	->Is-a (one class is a type of another)
+Flexibility:	*More flexible, allows runtime behavior changes	->Less flexible, fixed at compile time
+Coupling:	    *Loosely coupled	                            ->Tightly coupled
+Reusability:	*Promotes high reusability	                    ->Limited reusability
+Encapsulation:	*Better encapsulation	                        ->Exposes implementation details
+
+=======================Examples==========================================
+
+Example 1: Car and Engine
+A Car class can use composition to include an Engine object. 
+The Car class can delegate the starting and stopping functionalities to the Engine 
+class.
+
+class Engine {
+    public void start() {
+        System.out.println("Engine started.");
+    }
+
+    public void stop() {
+        System.out.println("Engine stopped.");
+    }
+}
+
+class Car {
+    private Engine engine;
+
+    public Car() {
+        this.engine = new Engine();
+    }
+
+    public void startCar() {
+        engine.start();
+        System.out.println("Car started.");
+    }
+
+    public void stopCar() {
+        engine.stop();
+        System.out.println("Car stopped.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.startCar();  // Output: Engine started. Car started.
+        car.stopCar();   // Output: Engine stopped. Car stopped.
+    }
+}
+Example 2: Computer and Components
+A Computer class can use composition to include CPU, RAM, and HardDrive objects. 
+The Computer class can delegate the functionalities to these components.
+
+class CPU {
+    public void process() {
+        System.out.println("CPU processing...");
+    }
+}
+
+class RAM {
+    public void load() {
+        System.out.println("RAM loading...");
+    }
+}
+
+class HardDrive {
+    public void readData() {
+        System.out.println("HardDrive reading data...");
+    }
+}
+
+class Computer {
+    private CPU cpu;
+    private RAM ram;
+    private HardDrive hardDrive;
+
+    public Computer() {
+        this.cpu = new CPU();
+        this.ram = new RAM();
+        this.hardDrive = new HardDrive();
+    }
+
+    public void startComputer() {
+        cpu.process();
+        ram.load();
+        hardDrive.readData();
+        System.out.println("Computer started.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Computer computer = new Computer();
+        computer.startComputer();
+        // Output:
+        // CPU processing...
+        // RAM loading...
+        // HardDrive reading data...
+        // Computer started.
+    }
+}
