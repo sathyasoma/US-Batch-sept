@@ -1,0 +1,105 @@
+It involves bundling the data (variables) and the methods (functions) 
+that operate on the data into a single unit, usually a class. 
+Encapsulation also restricts direct access to some of an object's components, 
+which prevents unintended interference and misuse of the data.
+
+What is Encapsulation?
+-----------------------
+Encapsulation is the technique of making the fields in a class private and providing
+access to them via public methods. It restricts direct access to certain components
+of an object and protects the integrity of the data by controlling modifications.
+
+Benefits of Encapsulation:
+--------------------------
+Improved Maintainability: Encapsulation allows for the modularization of code, making it easier to maintain and modify.
+Enhanced Security: Encapsulation helps protect data from unauthorized access and modification by restricting access to an object's internal state.
+Controlled Access: Encapsulation provides control over the data by exposing only the necessary methods to interact with it, ensuring that the data is used in a controlled manner.
+Flexibility and Reusability: Encapsulation allows changes to the implementation without affecting the users of the class, making the code more flexible and reusable.
+Encapsulation in Java
+In Java, encapsulation is achieved by:
+
+Declaring the fields of a class as private.
+Providing public getter and setter methods to access and modify the fields.
+
+Access Modifiers:
+-----------------
+Java provides four types of access modifiers to control the visibility of class members:
+
+private: The member is accessible only within the same class.
+default (no modifier): The member is accessible only within the same package.
+protected: The member is accessible within the same package and subclasses.
+public: The member is accessible from any other class.
+
+Real-World Examples of Encapsulation:
+======================================
+Example 1: Medical Records
+In a hospital management system, patient data should be encapsulated to ensure that 
+it is accessed and modified only through authorized methods, maintaining the 
+integrity and confidentiality of the information.
+
+Example 2: Banking System
+In a banking application, account details such as account balance should be 
+encapsulated to prevent unauthorized access and modification, ensuring the security 
+and consistency of the data.
+
+
+============================Examples====================================
+
+Example: Encapsulation in Java
+
+
+public class Person {
+    // Private fields
+    private String name;
+    private int age;
+
+    // Public getter method for name
+    public String getName() {
+        return name;
+    }
+
+    // Public setter method for name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Public getter method for age
+    public int getAge() {
+        return age;
+    }
+
+    // Public setter method for age
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Age cannot be negative or zero");
+        }
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.setName("John Doe");
+        person.setAge(30);
+
+        System.out.println("Name: " + person.getName());  // Output: Name: John Doe
+        System.out.println("Age: " + person.getAge());    // Output: Age: 30
+
+        person.setAge(-5); // Output: Age cannot be negative or zero
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
