@@ -1,0 +1,273 @@
+Exercise 1: Matching Email Addresses
+Write a Java program that checks if a given string is a valid email address according to the standard format (e.g., username@domain.com). Use regular expressions to validate the email address.
+
+
+import java.util.regex.*;
+
+public class EmailValidator {
+    public static boolean isValidEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        String email = "test@example.com";
+        if (isValidEmail(email)) {
+            System.out.println(email + " is a valid email address.");
+        } else {
+            System.out.println(email + " is not a valid email address.");
+        }
+    }
+}
+Exercise 2: Extracting Phone Numbers
+Write a Java program that extracts all valid phone numbers (in the format XXX-XXX-XXXX) from a given text using regular expressions.
+
+
+import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PhoneNumberExtractor {
+    public static List<String> extractPhoneNumbers(String text) {
+        List<String> phoneNumbers = new ArrayList<>();
+        String regex = "\\d{3}-\\d{3}-\\d{4}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        
+        while (matcher.find()) {
+            phoneNumbers.add(matcher.group());
+        }
+        
+        return phoneNumbers;
+    }
+
+    public static void main(String[] args) {
+        String text = "Here are some phone numbers: 123-456-7890, 987-654-3210, and 555-555-5555.";
+        List<String> phoneNumbers = extractPhoneNumbers(text);
+        
+        for (String phoneNumber : phoneNumbers) {
+            System.out.println("Phone number: " + phoneNumber);
+        }
+    }
+}
+Exercise 3: Validating URLs
+Write a Java program that validates URLs using regular expressions. Ensure that the URLs start with "http://" or "https://" and have a valid domain name.
+
+
+import java.util.regex.*;
+
+public class UrlValidator {
+    public static boolean isValidUrl(String url) {
+        String regex = "^(http|https)://[A-Za-z0-9.-]+(\\.[A-Za-z]{2,})?(:\\d+)?(/\\S*)?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(url);
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        String url = "https://www.example.com:8080/page";
+        if (isValidUrl(url)) {
+            System.out.println(url + " is a valid URL.");
+        } else {
+            System.out.println(url + " is not a valid URL.");
+        }
+    }
+}
+
+Exercise 4: Validating Social Security Numbers
+Write a Java program that validates Social Security Numbers (SSN) in the format "XXX-XX-XXXX," where X is a digit. Use regular expressions to validate SSNs.
+
+
+import java.util.regex.*;
+
+public class SSNValidator {
+    public static boolean isValidSSN(String ssn) {
+        String regex = "^(?!000|666|9\\d\\d)\\d{3}-(?!00)\\d{2}-(?!0000)\\d{4}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(ssn);
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        String ssn = "123-45-6789";
+        if (isValidSSN(ssn)) {
+            System.out.println(ssn + " is a valid Social Security Number.");
+        } else {
+            System.out.println(ssn + " is not a valid Social Security Number.");
+        }
+    }
+}
+Exercise 5: Extracting Dates
+Write a Java program that extracts all valid dates in the format "MM/DD/YYYY" from a given text using regular expressions.
+
+
+import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DateExtractor {
+    public static List<String> extractDates(String text) {
+        List<String> dates = new ArrayList<>();
+        String regex = "(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/\\d{4}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        
+        while (matcher.find()) {
+            dates.add(matcher.group());
+        }
+        
+        return dates;
+    }
+
+    public static void main(String[] args) {
+        String text = "Dates in this text: 01/15/2022, 12/31/2023, and 05/05/21.";
+        List<String> dates = extractDates(text);
+        
+        for (String date : dates) {
+            System.out.println("Date: " + date);
+        }
+    }
+}
+Exercise 6: Counting Words
+Write a Java program that counts the number of words in a given text. Use regular expressions to split the text into words.
+
+
+import java.util.regex.*;
+
+public class WordCounter {
+    public static int countWords(String text) {
+        String regex = "\\b\\w+\\b";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        int count = 0;
+        
+        while (matcher.find()) {
+            count++;
+        }
+        
+        return count;
+    }
+
+    public static void main(String[] args) {
+        String text = "This is a sample sentence with words.";
+        int wordCount = countWords(text);
+        System.out.println("Word count: " + wordCount);
+    }
+}
+
+Exercise 7: Validating IP Addresses
+Write a Java program that validates IP addresses (IPv4) using regular expressions. Ensure that the IP address consists of four groups of numbers separated by periods (e.g., "192.168.0.1").
+
+
+import java.util.regex.*;
+
+public class IPAddressValidator {
+    public static boolean isValidIPAddress(String ipAddress) {
+        String regex = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(ipAddress);
+        return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        String ipAddress = "192.168.0.1";
+        if (isValidIPAddress(ipAddress)) {
+            System.out.println(ipAddress + " is a valid IP address.");
+        } else {
+            System.out.println(ipAddress + " is not a valid IP address.");
+        }
+    }
+}
+Exercise 8: Extracting Hashtags
+Write a Java program that extracts all hashtags (#example) from a given text using regular expressions.
+
+
+import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class HashtagExtractor {
+    public static List<String> extractHashtags(String text) {
+        List<String> hashtags = new ArrayList<>();
+        String regex = "#\\w+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        
+        while (matcher.find()) {
+            hashtags.add(matcher.group());
+        }
+        
+        return hashtags;
+    }
+
+    public static void main(String[] args) {
+        String text = "Check out these #java exercises and #programming tips! #coding";
+        List<String> hashtags = extractHashtags(text);
+        
+        for (String hashtag : hashtags) {
+            System.out.println("Hashtag: " + hashtag);
+        }
+    }
+}
+Exercise 9: Removing HTML Tags
+Write a Java program that removes all HTML tags from a given HTML document using regular expressions.
+
+
+public class HTMLTagRemover {
+    public static String removeHTMLTags(String html) {
+        return html.replaceAll("<[^>]+>", "");
+    }
+
+    public static void main(String[] args) {
+        String html = "<p>This is <b>bold</b> text.</p>";
+        String textWithoutTags = removeHTMLTags(html);
+        System.out.println("Text without HTML tags: " + textWithoutTags);
+    }
+}
+
+Exercise 10: Validating Credit Card Numbers
+Write a Java program that validates credit card numbers using regular expressions. Ensure that the credit card number follows a valid format and passes the Luhn algorithm check.
+
+java
+Copy code
+import java.util.regex.*;
+
+public class CreditCardValidator {
+    public static boolean isValidCreditCard(String creditCard) {
+        // Ensure the credit card number consists of 16 digits
+        String regex = "^[0-9]{16}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(creditCard);
+
+        if (!matcher.matches()) {
+            return false;
+        }
+
+        // Perform the Luhn algorithm check
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = creditCard.length() - 1; i >= 0; i--) {
+            int digit = Integer.parseInt(creditCard.substring(i, i + 1));
+            if (alternate) {
+                digit *= 2;
+                if (digit > 9) {
+                    digit -= 9;
+                }
+            }
+            sum += digit;
+            alternate = !alternate;
+        }
+        return (sum % 10 == 0);
+    }
+
+    public static void main(String[] args) {
+        String creditCard = "4532015112830366";
+        if (isValidCreditCard(creditCard)) {
+            System.out.println(creditCard + " is a valid credit card number.");
+        } else {
+            System.out.println(creditCard + " is not a valid credit card number.");
+        }
+    }
+}
