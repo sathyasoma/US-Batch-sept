@@ -1,0 +1,75 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class EmployeeCRUDOperations {
+
+ public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//1)loading driver class add postgresql jar file
+Class.forName("org.postgresql.Driver");
+
+ //2)create the connection
+
+ Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/sleeping","postgres","rps");
+
+ //3)create the statement
+
+ Statement stmt=conn.createStatement();
+
+ //4)execute query ddl-->execute() ,dml-->executeUpdate(),drl-->executeQuery()
+boolean result= stmt.execute("create table sleeping(sid int,stname varchar(10))");
+//5)close the connection
+System.out.println(result+"table created");
+conn.close();
+
+ }
+
+}
+
+"oracle.jdbc.driver.OracleDriver"
+"jdbc:oracle:thin:@localhost:1521:xe", "sathya", "sathya123"
+
+
+package com.cg.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class EmployeeCRUDOperations {
+
+ public static void main(String[] args) throws ClassNotFoundException, SQLException {
+// 1)loading driver class add postgresql jar file
+Class.forName("org.postgresql.Driver");// OracleDriver,MysqlDriver
+
+ // 2)create the connection
+
+ Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/sleeping", "postgres", "rps");
+
+ // 3)create the statement
+
+ Statement stmt = conn.createStatement();
+
+ // 4)execute query ddl-->execute() ,dml-->executeUpdate(),drl-->executeQuery()
+
+ ResultSet result = stmt.executeQuery("select * from emp");
+// 5)close the connection
+while (result.next()) {
+
+ System.out.println(result.getInt(1) + " " + result.getString("ename") + " " + result.getString(3));
+
+ }
+
+ conn.close();
+
+ }
+
+}
+
+
+
+
+postgres link for jar files:: https://jdbc.postgresql.org/download.html
